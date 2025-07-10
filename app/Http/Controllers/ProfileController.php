@@ -11,11 +11,25 @@ use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 
+
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property \Carbon\Carbon|null $email_verified_at
+ * @property string $password
+ * @property string|null $remember_token
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ */
+
 class ProfileController extends Controller
 {
     /**
      * Display the user's profile form.
      */
+
+
     public function edit(Request $request): Response
     {
         return Inertia::render('Profile/Edit', [
@@ -32,7 +46,8 @@ class ProfileController extends Controller
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+            //$request->user()->email_verified_at = null;
+            $request->user()->forceFill(['email_verified_at' => null]);
         }
 
         $request->user()->save();
