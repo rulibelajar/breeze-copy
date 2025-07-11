@@ -18,8 +18,11 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-
+    // saya tambahkan sendiri untuk mengganti imenjadi uuid
     use HasUuids;
+
+    protected $keyType = 'string';
+    public $incrementing = false;
 
     protected $fillable = [
         'name',
