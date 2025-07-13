@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\checkController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\UserController;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -31,7 +33,6 @@ Route::get('/cek1', function () {
 
 Route::get('/cek2', [checkController::class, 'index'])->middleware(['auth', 'verified']);
 
-require __DIR__ . '/auth.php';
 
 // User Route
 Route::middleware(['auth', 'userMiddleware'])->group(function () {
@@ -41,4 +42,7 @@ Route::middleware(['auth', 'userMiddleware'])->group(function () {
 // Admin Route
 Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/user', [AdminUserController::class, 'index'])->name('admin.user');
 });
+
+require __DIR__ . '/auth.php';
