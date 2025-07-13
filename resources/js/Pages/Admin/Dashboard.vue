@@ -1,12 +1,13 @@
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import AdminAuthenticatedLayout from "@/Layouts/AdminAuthenticatedLayout.vue";
+
 import { Head } from "@inertiajs/vue3";
 </script>
 
 <template>
     <Head title="Admin Dashboard" />
 
-    <AuthenticatedLayout>
+    <AdminAuthenticatedLayout>
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 Admin Dashboard
@@ -20,5 +21,5 @@ import { Head } from "@inertiajs/vue3";
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </AdminAuthenticatedLayout>
 </template>
