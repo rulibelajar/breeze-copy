@@ -27,11 +27,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/cek1', function () {
-    return '<h1>Cek 1</h1>';
-})->middleware(['auth', 'verified']);
-
-Route::get('/cek2', [checkController::class, 'index'])->middleware(['auth', 'verified']);
 
 
 // User Route
@@ -43,6 +38,7 @@ Route::middleware(['auth', 'userMiddleware'])->group(function () {
 Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/user', [AdminUserController::class, 'index'])->name('admin.user');
+    Route::put('/admin/users/{user}/ban', [AdminUserController::class, 'ban'])->name('admin.user.ban');
 });
 
 require __DIR__ . '/auth.php';

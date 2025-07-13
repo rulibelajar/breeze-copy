@@ -17,4 +17,16 @@ class AdminUserController extends Controller
             'users' => $users,
         ]);
     }
+
+    public function ban(Request $request, User $user)
+    {
+        $validate = $request->validate([
+            'banned' => 'required|boolean',
+        ]);
+
+        $user->banned = $validate['banned'];
+        $user->save();
+
+        return back()->with('success', 'User successfully banned');
+    }
 }
