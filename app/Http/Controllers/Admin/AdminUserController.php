@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Inertia\Inertia;
 
 class AdminUserController extends Controller
 {
@@ -12,8 +13,9 @@ class AdminUserController extends Controller
     public function index()
     {
         // tampilkan semua users
-        $users = User::all();
-        return inertia('Admin/User', [
+        $users = User::paginate(10);
+
+        return Inertia::render('Admin/User', [
             'users' => $users,
         ]);
     }
