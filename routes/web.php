@@ -35,7 +35,7 @@ Route::middleware(['auth', 'userMiddleware'])->group(function () {
     Route::get('dashboard', [UserController::class, 'index'])->name('dashboard');
 });
 
-// Admin Route
+// Admin Route Coba
 Route::middleware(['auth', 'adminMiddleware'])
     ->prefix('admin')
     ->name('admin.')
