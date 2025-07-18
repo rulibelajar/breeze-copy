@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminUserController;
-use App\Http\Controllers\checkController;
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\UserController;
 
@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
 });
 
 
+require __DIR__ . '/auth.php';
 
 // User Route
 Route::middleware(['auth', 'userMiddleware'])->group(function () {
@@ -35,10 +36,12 @@ Route::middleware(['auth', 'userMiddleware'])->group(function () {
 });
 
 // Admin Route
-Route::middleware(['auth', 'adminMiddleware'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::get('/admin/user', [AdminUserController::class, 'index'])->name('admin.user');
-    Route::put('/admin/users/{user}/ban', [AdminUserController::class, 'ban'])->name('admin.user.ban');
-});
-
-require __DIR__ . '/auth.php';
+Route::middleware(['auth', 'adminMiddleware'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::get('/', [AdminController::class, 'index'])->name('index');
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+        Route::get('/user', [AdminUserController::class, 'index'])->name('user');
+        Route::put('/users/{user}/ban', [AdminUserController::class, 'ban'])->name('user.ban');
+    });
