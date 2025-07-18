@@ -11,11 +11,11 @@ class AdminController extends Controller
 
     public function index(): Response
     {
-        return inertia('Admin/Index');
+        return Inertia::render('Admin/Index');
     }
 
     public function dashboard(): Response
     {
-        return inertia('Admin/Dashboard');
+        return Inertia::render('Admin/Profile/Dashboard');
     }
 }

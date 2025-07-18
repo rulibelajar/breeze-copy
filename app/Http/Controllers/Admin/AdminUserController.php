@@ -15,7 +15,7 @@ class AdminUserController extends Controller
         // tampilkan semua users
         $users = User::paginate(10);
 
-        return Inertia::render('Admin/User', [
+        return Inertia::render('Admin/User/User', [
             'users' => $users,
         ]);
     }

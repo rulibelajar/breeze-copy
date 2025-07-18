@@ -33,6 +33,7 @@
                             >Welcome, Admin</span
                         >
                         <button
+                            @click="logout"
                             class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
                         >
                             Logout
@@ -98,7 +99,7 @@ export default {
                     icon: "users",
                     value: "1,234",
                     color: "blue",
-                    route: "/admin/users",
+                    route: "/admin/user",
                 },
                 {
                     title: "Analytics",
@@ -178,6 +179,9 @@ export default {
     methods: {
         navigateTo(route) {
             this.$inertia.visit(route);
+        },
+        logout() {
+            this.$inertia.post(route("logout"));
         },
     },
     mounted() {
