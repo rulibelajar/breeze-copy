@@ -30,7 +30,12 @@
                     </div>
                     <div class="flex items-center space-x-4">
                         <span class="text-sm text-blue-100"
-                            >Welcome, Admin</span
+                            >Welcome,
+                            <a
+                                :href="route('admin.dashboard')"
+                                class="font-semibold hover:text-blue-200 transition-all duration-200"
+                                >{{ user ? user.name : "Guest" }}</a
+                            ></span
                         >
                         <button
                             @click="logout"
@@ -89,6 +94,8 @@ export default {
             type: Object,
             default: () => ({}),
         },
+
+        user: Object,
     },
     data() {
         return {

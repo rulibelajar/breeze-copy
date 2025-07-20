@@ -37,12 +37,6 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Admin Dashboard
                                 </NavLink>
-                                <NavLink
-                                    :href="route('admin.user')"
-                                    :active="route().current('admin.user')"
-                                >
-                                    Admin User
-                                </NavLink>
                             </div>
                         </div>
 
@@ -79,6 +73,9 @@ const showingNavigationDropdown = ref(false);
                                             :href="route('profile.edit')"
                                         >
                                             Profile
+                                        </DropdownLink>
+                                        <DropdownLink href="/admin">
+                                            Admin
                                         </DropdownLink>
                                         <DropdownLink
                                             :href="route('logout')"
@@ -167,6 +164,7 @@ const showingNavigationDropdown = ref(false);
                             <ResponsiveNavLink :href="route('profile.edit')">
                                 Profile
                             </ResponsiveNavLink>
+
                             <ResponsiveNavLink
                                 :href="route('logout')"
                                 method="post"
