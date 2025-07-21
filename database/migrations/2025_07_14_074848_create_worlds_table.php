@@ -13,21 +13,11 @@ return new class extends Migration
     {
         Schema::create('worlds', function (Blueprint $table) {
             $table->id();
-
-            // Relasi ke users (boleh kosong, dan jika user dihapus, field jadi null)
-            $table->uuid('user_id')
-                ->nullable();
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('set null');
-
-            // nama world
             $table->string('name');
-
-            // tanggal mulai dan selesai (boleh kosong)
-            $table->date('start_date')->nullable();
-            $table->date('end_date')->nullable();
+            $table->integer('day_game')->default(1); // Hari game saat ini (1-90)
+            $table->datetime('last_day_change'); // Kapan terakhir hari berganti
+            $table->datetime('next_day_change'); // Kapan hari akan berganti lagi
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

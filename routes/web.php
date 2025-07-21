@@ -10,6 +10,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+use App\Http\Controllers\World\WorldController;
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -44,4 +46,11 @@ Route::middleware(['auth', 'adminMiddleware'])
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
         Route::get('/user', [AdminUserController::class, 'index'])->name('user');
         Route::put('/users/{user}/ban', [AdminUserController::class, 'ban'])->name('user.ban');
+
+        // World Model
+        Route::resource('worlds', WorldController::class);
+        Route::post('/worlds/{world}/reset', [WorldController::class, 'reset'])->name('worlds.reset');
+
+        // API routes untuk real-time data
+        Route::get('/api/worlds/{world}/data', [WorldController::class, 'getWorldData']);
     });
