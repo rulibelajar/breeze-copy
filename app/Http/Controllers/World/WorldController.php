@@ -60,7 +60,7 @@ class WorldController extends Controller
             'is_active' => true
         ]);
 
-        return redirect()->route('worlds.show', $world);
+        return redirect()->route('admin.worlds.show', $world);
     }
 
     public function reset(World $world)

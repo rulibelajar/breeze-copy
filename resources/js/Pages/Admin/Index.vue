@@ -109,12 +109,13 @@ export default {
                     route: "/admin/user",
                 },
                 {
-                    title: "Analytics",
-                    description: "Game statistics & metrics",
-                    icon: "chart-bar",
-                    value: "98%",
+                    title: "World",
+                    description: "Manage world & game settings",
+                    icon: "globe",
+
+                    value: "3",
                     color: "indigo",
-                    route: "/admin/analytics",
+                    route: "/admin/worlds",
                 },
                 {
                     title: "Aircraft",

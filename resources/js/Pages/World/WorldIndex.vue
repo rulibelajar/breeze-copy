@@ -239,7 +239,8 @@ export default {
 
         // View world detail
         const viewWorld = (worldId) => {
-            router.get(`/worlds/${worldId}`);
+            router.get(`/admin/worlds/${worldId}`);
+            //router.visit(`/worlds/${worldId}`);
         };
 
         // Create new world
@@ -249,7 +250,7 @@ export default {
             creating.value = true;
 
             router.post(
-                "/worlds",
+                "/admin/worlds",
                 {
                     name: newWorldName.value.trim(),
                 },

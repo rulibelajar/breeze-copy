@@ -48,7 +48,9 @@ Route::middleware(['auth', 'adminMiddleware'])
         Route::put('/users/{user}/ban', [AdminUserController::class, 'ban'])->name('user.ban');
 
         // World Model
-        Route::resource('worlds', WorldController::class);
+        Route::get('worlds', [WorldController::class, 'index'])->name('worlds');
+        Route::get('worlds/{world}', [WorldController::class, 'show'])->name('worlds.show');
+        Route::post('worlds', [WorldController::class, 'store'])->name('worlds.store');
         Route::post('/worlds/{world}/reset', [WorldController::class, 'reset'])->name('worlds.reset');
 
         // API routes untuk real-time data

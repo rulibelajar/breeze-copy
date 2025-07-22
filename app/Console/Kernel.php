@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
     {
         // Jalankan advance game day setiap 20 menit
         $schedule->command('game:advance-day')
-            ->everyTwentyMinutes()
+            ->everyMinutes()
             ->withoutOverlapping()
             ->runInBackground();
     }

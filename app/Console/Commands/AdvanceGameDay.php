@@ -14,18 +14,23 @@ class AdvanceGameDay extends Command
     public function handle(): int
     {
         $worlds = World::where('is_active', true)->get();
+        $advanced = 0;
 
         foreach ($worlds as $world) {
             if ($world->shouldAdvanceDay()) {
                 $oldDay = $world->day_game;
                 $world->advanceDay();
 
-                $this->info("World '{$world->name}' advanced from day {$oldDay} to day {$world->day_game}");
+                $this->info("✅ World '{$world->name}' advanced from day {$oldDay} to day {$world->day_game}");
                 Log::info("World {$world->id} advanced from day {$oldDay} to day {$world->day_game}");
-
-                // Broadcast event untuk update real-time (opsional)
-                // broadcast(new GameDayAdvanced($world));
+                $advanced++;
+            } else {
+                $this->line("⏳ World '{$world->name}' not ready (next change at {$world->next_day_change})");
             }
+        }
+
+        if ($advanced === 0) {
+            $this->warn("🚫 No worlds were advanced. Either not active, already day 90, or not yet time.");
         }
 
         return self::SUCCESS;
