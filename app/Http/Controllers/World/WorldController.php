@@ -11,7 +11,10 @@ use Inertia\Response;
 class WorldController extends Controller
 {
     public function index(): Response
+
     {
+        $now = now()->toIso8601String();
+
         $worlds = World::where('is_active', true)->get()->map(function ($world) {
             return [
                 'id' => $world->id,
@@ -26,7 +29,8 @@ class WorldController extends Controller
         });
 
         return Inertia::render('World/WorldIndex', [
-            'worlds' => $worlds
+            'worlds' => $worlds,
+            'now' => $now
         ]);
     }
 

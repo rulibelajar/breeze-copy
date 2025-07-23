@@ -46,7 +46,7 @@ class World extends Model
         if ($this->day_game < 90) {
             $this->day_game++;
             $this->last_day_change = Carbon::now();
-            $this->next_day_change = Carbon::now()->addMinutes(20);
+            $this->next_day_change = Carbon::now()->addMinutes(1);
             $this->save();
         }
     }
@@ -94,7 +94,7 @@ class World extends Model
     {
         $this->day_game = 1;
         $this->last_day_change = Carbon::now();
-        $this->next_day_change = Carbon::now()->addMinutes(20);
+        $this->next_day_change = Carbon::now()->addMinutes(1);
         $this->is_active = true;
         $this->save();
     }

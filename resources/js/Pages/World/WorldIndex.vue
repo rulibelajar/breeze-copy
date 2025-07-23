@@ -9,6 +9,10 @@
                     <h1 class="text-4xl font-bold text-white mb-2">
                         Game Worlds
                     </h1>
+
+                    <h3 class="text-2xl font-bold text-white">
+                        {{ formattedNow }}
+                    </h3>
                     <p class="text-blue-200">Manage your fantasy worlds</p>
                 </div>
                 <button
@@ -211,6 +215,7 @@ import { router } from "@inertiajs/vue3";
 export default {
     props: {
         worlds: Array,
+        now: String,
     },
 
     setup(props) {
@@ -219,9 +224,36 @@ export default {
         const creating = ref(false);
         const resettingWorld = ref(null);
         const worldsData = ref([...props.worlds]);
+
+        // =========================
+        // JAM SERVER DINAMIS
+        // =========================
+        const formattedNow = ref("");
+        let serverDate = new Date(props.now);
+        let nowInterval = null;
+
+        const updateFormattedNow = () => {
+            formattedNow.value = serverDate.toLocaleString("id-ID", {
+                timeZone: "Asia/Jakarta",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+            });
+        };
+
+        const tickServerTime = () => {
+            serverDate.setSeconds(serverDate.getSeconds() + 1);
+            updateFormattedNow();
+        };
+
+        // =========================
+        // Refresh countdown worlds
+        // =========================
         let refreshInterval = null;
 
-        // Format waktu countdown
         const formatTime = (seconds) => {
             if (seconds <= 0) return "00:00";
             const minutes = Math.floor(seconds / 60);
@@ -231,19 +263,17 @@ export default {
                 .padStart(2, "0")}`;
         };
 
-        // Format datetime
         const formatDateTime = (dateString) => {
             const date = new Date(dateString);
-            return date.toLocaleString();
+            return date.toLocaleString("id-ID", {
+                timeZone: "Asia/Jakarta",
+            });
         };
 
-        // View world detail
-        const viewWorld = (worldId) => {
-            router.get(`/admin/worlds/${worldId}`);
-            //router.visit(`/worlds/${worldId}`);
+        const viewWorld = (id) => {
+            router.get(`/admin/worlds/${id}`);
         };
 
-        // Create new world
         const createWorld = () => {
             if (!newWorldName.value.trim()) return;
 
@@ -267,69 +297,59 @@ export default {
             );
         };
 
-        // Reset world
-        const resetWorld = (worldId) => {
-            if (
-                confirm("Are you sure you want to reset this world to day 1?")
-            ) {
-                resettingWorld.value = worldId;
+        const resetWorld = (id) => {
+            if (!confirm("Reset this world to day 1?")) return;
 
-                router.post(
-                    `/worlds/${worldId}/reset`,
-                    {},
-                    {
-                        onSuccess: () => {
-                            resettingWorld.value = null;
-                            // Refresh page data
-                            router.reload();
-                        },
-                        onError: () => {
-                            resettingWorld.value = null;
-                        },
-                    }
-                );
-            }
-        };
+            resettingWorld.value = id;
 
-        // Refresh worlds data
-        const refreshWorldsData = async () => {
-            try {
-                // Update countdown timers
-                worldsData.value = worldsData.value.map((world) => ({
-                    ...world,
-                    fantasy_date: {
-                        ...world.fantasy_date,
-                        next_change_in_seconds: Math.max(
-                            0,
-                            world.fantasy_date.next_change_in_seconds - 1
-                        ),
+            router.post(
+                `/worlds/${id}/reset`,
+                {},
+                {
+                    onSuccess: () => {
+                        resettingWorld.value = null;
+                        router.reload({ only: ["worlds"] });
                     },
-                }));
-
-                // Check if any world needs refresh from server
-                const needsRefresh = worldsData.value.some(
-                    (world) => world.fantasy_date.next_change_in_seconds <= 0
-                );
-
-                if (needsRefresh) {
-                    router.reload({ only: ["worlds"] });
+                    onError: () => {
+                        resettingWorld.value = null;
+                    },
                 }
-            } catch (error) {
-                console.error("Error refreshing worlds data:", error);
+            );
+        };
+
+        const refreshWorldsData = () => {
+            worldsData.value = worldsData.value.map((world) => ({
+                ...world,
+                fantasy_date: {
+                    ...world.fantasy_date,
+                    next_change_in_seconds: Math.max(
+                        0,
+                        world.fantasy_date.next_change_in_seconds - 1
+                    ),
+                },
+            }));
+
+            const needsRefresh = worldsData.value.some(
+                (world) => world.fantasy_date.next_change_in_seconds <= 0
+            );
+
+            if (needsRefresh) {
+                router.reload({ only: ["worlds"] });
             }
         };
 
-        // Start auto refresh
-        const startAutoRefresh = () => {
-            refreshInterval = setInterval(refreshWorldsData, 1000);
-        };
-
+        // =========================
+        // Lifecycle
+        // =========================
         onMounted(() => {
-            startAutoRefresh();
+            updateFormattedNow();
+            nowInterval = setInterval(tickServerTime, 1000);
+            refreshInterval = setInterval(refreshWorldsData, 1000);
         });
 
         onUnmounted(() => {
-            if (refreshInterval) clearInterval(refreshInterval);
+            clearInterval(nowInterval);
+            clearInterval(refreshInterval);
         });
 
         return {
@@ -337,14 +357,13 @@ export default {
             newWorldName,
             creating,
             resettingWorld,
-            worldsData,
+            worlds: worldsData,
+            formattedNow,
             formatTime,
             formatDateTime,
             viewWorld,
             createWorld,
             resetWorld,
-            // Use computed or reactive worlds
-            worlds: worldsData,
         };
     },
 };
