@@ -21,4 +21,4 @@ Schedule::call(function () {
     GameWorld::query()->increment('day_game');
     //Buatkan untk column 'next_day_change' now ditambah 20 menit
     GameWorld::query()->update(['next_day_change' => Carbon::now()->addMinutes(10)]);
-})->everyMinute();
+})->everyTenMinutes();
