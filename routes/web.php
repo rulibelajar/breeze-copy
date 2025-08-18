@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminUserController;
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\GameWorldController;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +53,9 @@ Route::middleware(['auth', 'adminMiddleware'])
         Route::get('worlds/{world}', [WorldController::class, 'show'])->name('worlds.show');
         Route::post('worlds', [WorldController::class, 'store'])->name('worlds.store');
         Route::post('/worlds/{world}/reset', [WorldController::class, 'reset'])->name('worlds.reset');
+
+        Route::get('gameworlds', [GameWorldController::class, 'index'])->name('gameworlds');
+
 
         // API routes untuk real-time data
         Route::get('/api/worlds/{world}/data', [WorldController::class, 'getWorldData']);

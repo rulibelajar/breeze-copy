@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\GameWorld;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -38,6 +39,7 @@ class DatabaseSeeder extends Seeder
             'last_day_change' => Carbon::now()->subMinutes(2),
             'next_day_change' => Carbon::now()->subSeconds(10),
             'is_active' => true
+
         ]);
 
         World::create([
@@ -46,6 +48,21 @@ class DatabaseSeeder extends Seeder
             'last_day_change' => Carbon::now()->subMinutes(2),
             'next_day_change' => Carbon::now()->subSeconds(5),
             'is_active' => true
+        ]);
+
+        GameWorld::create([
+            'name' => 'Game World 1',
+            'day_game' => 1,
+        ]);
+
+        GameWorld::create([
+            'name' => 'Game World 2',
+            'day_game' => 5
+        ]);
+
+        GameWorld::create([
+            'name' => 'Game World 3',
+            'day_game' => 10
         ]);
     }
 }
