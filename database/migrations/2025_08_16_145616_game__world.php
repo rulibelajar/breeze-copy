@@ -15,7 +15,8 @@ return new class extends Migration
         Schema::create('game_worlds', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('day_game')->default(1);
+            $table->date('game_date')->default('1930-01-01');
+            $table->integer('game_day')->default(1);
             $table->dateTime('next_day_change')->nullable();
             $table->timestamps();
         });

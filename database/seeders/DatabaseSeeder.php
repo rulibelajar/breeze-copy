@@ -52,17 +52,20 @@ class DatabaseSeeder extends Seeder
 
         GameWorld::create([
             'name' => 'Game World 1',
-            'day_game' => 1,
+            'game_day' => 1,
+            'game_date' => '1970-01-01'
         ]);
 
         GameWorld::create([
             'name' => 'Game World 2',
-            'day_game' => 5
+            'game_day' => 1,
+            'game_date' => '1990-01-01'
         ]);
 
         GameWorld::create([
             'name' => 'Game World 3',
-            'day_game' => 10
+            'game_day' => 1,
+            'game_date' => '2000-01-01'
         ]);
     }
 }

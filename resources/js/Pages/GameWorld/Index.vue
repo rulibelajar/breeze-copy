@@ -19,7 +19,8 @@ defineProps({
             >
                 <h2 class="font-semibold text-lg">{{ world.name }}</h2>
                 <p>Name: {{ world.name }}</p>
-                <p>Day Game: {{ world.day_game }}</p>
+                <p>Day Game: {{ world.game_day }}</p>
+                <p>Day Date: {{ world.game_date }}</p>
                 <p>
                     Next Day Change:
                     <CountdownTimer :targetTime="world.next_day_change" />
