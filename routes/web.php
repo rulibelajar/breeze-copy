@@ -5,13 +5,11 @@ use App\Http\Controllers\Admin\AdminUserController;
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\UserController;
-use App\Http\Controllers\GameWorldController;
-
+use App\Http\Controllers\GameWorld\GameWorldController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-use App\Http\Controllers\World\WorldController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -48,15 +46,7 @@ Route::middleware(['auth', 'adminMiddleware'])
         Route::get('/user', [AdminUserController::class, 'index'])->name('user');
         Route::put('/users/{user}/ban', [AdminUserController::class, 'ban'])->name('user.ban');
 
-        // World Model
-        Route::get('worlds', [WorldController::class, 'index'])->name('worlds');
-        Route::get('worlds/{world}', [WorldController::class, 'show'])->name('worlds.show');
-        Route::post('worlds', [WorldController::class, 'store'])->name('worlds.store');
-        Route::post('/worlds/{world}/reset', [WorldController::class, 'reset'])->name('worlds.reset');
-
-        Route::get('gameworlds', [GameWorldController::class, 'index'])->name('gameworlds');
 
 
-        // API routes untuk real-time data
-        Route::get('/api/worlds/{world}/data', [WorldController::class, 'getWorldData']);
+        Route::get('game-worlds', [GameWorldController::class, 'index'])->name('gameworlds');
     });

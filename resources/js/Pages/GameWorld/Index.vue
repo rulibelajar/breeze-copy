@@ -10,6 +10,12 @@ defineProps({
 <template>
     <div>
         <h1 class="text-3xl font-bold mb-4">{{ title }}</h1>
+        <a
+            href="/admin/"
+            class="inline-block bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded hover:bg-blue-700 transition"
+        >
+            Go to Admin
+        </a>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div

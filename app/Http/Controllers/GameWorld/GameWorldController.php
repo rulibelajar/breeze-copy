@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\GameWorld;
+
 
 use Illuminate\Http\Request;
 use App\Models\GameWorld;
 use Inertia\Inertia;
+use App\Http\Controllers\Controller;
 
 class GameWorldController extends Controller
 {

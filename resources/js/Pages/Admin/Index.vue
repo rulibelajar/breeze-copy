@@ -109,13 +109,13 @@ export default {
                     route: "/admin/user",
                 },
                 {
-                    title: "World",
+                    title: "Game-World",
                     description: "Manage world & game settings",
                     icon: "globe",
 
                     value: "3",
                     color: "indigo",
-                    route: "/admin/worlds",
+                    route: "/admin/game-worlds",
                 },
                 {
                     title: "Aircraft",

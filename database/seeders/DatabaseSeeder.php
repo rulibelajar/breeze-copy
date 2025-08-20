@@ -23,31 +23,11 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin',
             'email' => 'admin@example.com',
         ]);
-        // demgam ada
 
-        World::create([
-            'name' => 'Azeroth',
-            'day_game' => 1,
-            'last_day_change' => Carbon::now()->subMinutes(2),
-            'next_day_change' => Carbon::now()->subSeconds(30),
-            'is_active' => true
-        ]);
-
-        World::create([
-            'name' => 'Middle Earth',
-            'day_game' => 5,
-            'last_day_change' => Carbon::now()->subMinutes(2),
-            'next_day_change' => Carbon::now()->subSeconds(10),
-            'is_active' => true
-
-        ]);
-
-        World::create([
-            'name' => 'Westeros',
-            'day_game' => 10,
-            'last_day_change' => Carbon::now()->subMinutes(2),
-            'next_day_change' => Carbon::now()->subSeconds(5),
-            'is_active' => true
+        User::factory()->create([
+            'name' => 'Ruli User',
+            'username' => 'user',
+            'email' => 'user@example.com',
         ]);
 
         GameWorld::create([
