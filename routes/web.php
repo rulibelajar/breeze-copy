@@ -32,9 +32,12 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 
 // User Route
-Route::middleware(['auth', 'userMiddleware'])->group(function () {
-    Route::get('dashboard', [UserController::class, 'index'])->name('dashboard');
-});
+Route::middleware(['auth', 'userMiddleware'])
+    ->prefix('user')
+    ->name('user.')
+    ->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('worlds');
+    });
 
 // Admin Route Coba
 Route::middleware(['auth', 'adminMiddleware'])
