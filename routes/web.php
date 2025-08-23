@@ -33,10 +33,10 @@ require __DIR__ . '/auth.php';
 
 // User Route
 Route::middleware(['auth', 'userMiddleware'])
-    ->prefix('user')
-    ->name('user.')
     ->group(function () {
-        Route::get('/', [UserController::class, 'index'])->name('worlds');
+        //Route::get('/', [UserController::class, 'index'])->name('worlds');
+        Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+        Route::get('/worlds', [UserController::class, 'worlds'])->name('worlds');
     });
 
 // Admin Route Coba
