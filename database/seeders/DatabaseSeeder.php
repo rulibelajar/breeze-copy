@@ -7,6 +7,7 @@ use App\Models\Route;
 use App\Models\User;
 use App\Models\UserWorld;
 use App\Models\Aircraft;
+use App\Models\Worlds\UserWorld1;
 use Illuminate\Support\Facades\Hash;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -187,6 +188,14 @@ class DatabaseSeeder extends Seeder
                         'destination' => 'Tokyo',
                     ]);
                 }
+            }
+
+            foreach (User::all() as $user) {
+                UserWorld1::create([
+                    'user_id' => $user->id,
+                    'airline_name' => 'Airline ' . $user->username,
+                    'day_game' => 1,
+                ]);
             }
         }
     }

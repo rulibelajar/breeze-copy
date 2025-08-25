@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('worlds', function (Blueprint $table) {
+        Schema::create('user_world_1', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->foreignUuId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->string('airline_name');
             $table->integer('day_game')->default(1); // Hari game saat ini (1-90)
-            $table->datetime('last_day_change'); // Kapan terakhir hari berganti
-            $table->datetime('next_day_change'); // Kapan hari akan berganti lagi
+            $table->datetime('next_day_change')->nullable(); // Kapan hari akan berganti lagi
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
