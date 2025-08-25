@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\GameWorld\GameWorldController;
+use App\Http\Controllers\Admin\AircraftsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -48,6 +49,7 @@ Route::middleware(['auth', 'adminMiddleware'])
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
         Route::get('/user', [AdminUserController::class, 'index'])->name('user');
         Route::put('/users/{user}/ban', [AdminUserController::class, 'ban'])->name('user.ban');
+        Route::get('/aircrafts', [AircraftsController::class, 'index'])->name('aircrafts');
 
 
 

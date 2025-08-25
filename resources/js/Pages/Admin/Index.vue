@@ -118,12 +118,12 @@ export default {
                     route: "/admin/game-worlds",
                 },
                 {
-                    title: "Aircraft",
+                    title: "Aircrafts",
                     description: "Manage fleet & aircraft types",
                     icon: "paper-airplane",
                     value: "456",
                     color: "sky",
-                    route: "/admin/aircraft",
+                    route: "/admin/aircrafts",
                 },
                 {
                     title: "Routes",

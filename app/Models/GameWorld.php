@@ -12,4 +12,10 @@ class GameWorld extends Model
         'day_game',
         'next_day_change',
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_worlds')->withPivot('id', 'money')
+            ->withTimestamps();
+    }
 }

@@ -53,4 +53,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function worlds()
+    {
+        return $this->belongsToMany(GameWorld::class, 'user_worlds')->withPivot('id', 'money')
+            ->withTimestamps();
+    }
 }
