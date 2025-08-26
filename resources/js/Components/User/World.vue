@@ -1,14 +1,31 @@
 <script setup>
-import Modal from "@/Components/User/Modal.vue";
 import { ref } from "vue";
+import axios from "axios";
 
-const isOpen = ref(false);
-const selectedWorld = ref(null);
+// Airline name per-world supaya tidak campur
+const airlineNames = ref({});
 
-const closeModal = () => {
-    isOpen.value = false;
+// Fungsi untuk menyimpan world baru
+const saveWorld = async (world) => {
+    try {
+        // bikin alamat dinamis dari nama world, misalnya "Game World 1" -> "/world1"
+        const worldNumber = world.name.split(" ").pop(); // ambil angka terakhir dari nama
+        const url = `/world${worldNumber}`;
+
+        let response = await axios.post(url, {
+            airline_name: airlineNames.value[world.id] || "",
+        });
+
+        console.log("World saved:", response.data);
+
+        // reset input untuk world ini saja
+        airlineNames.value[world.id] = "";
+    } catch (error) {
+        console.error("Error:", error);
+    }
 };
 
+// props dari controller
 defineProps({
     worlds: Array,
     title: String,
@@ -31,31 +48,28 @@ defineProps({
                 <p>Name: {{ world.name }}</p>
                 <p>Day Game: {{ world.game_day }}</p>
                 <p>Day Date: {{ world.game_date }}</p>
-                <div class="p-6">
+
+                <form @submit.prevent="saveWorld(world)" class="space-y-4">
+                    <div>
+                        <label class="block mb-1 font-semibold"
+                            >Airline Name</label
+                        >
+                        <input
+                            v-model="airlineNames[world.id]"
+                            type="text"
+                            class="border px-3 py-2 rounded w-full"
+                            placeholder="Masukkan nama airline"
+                        />
+                    </div>
+
                     <button
-                        @click="
-                            () => {
-                                selectedWorld = world;
-                                isOpen = true;
-                            }
-                        "
-                        class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                        type="submit"
+                        class="px-4 py-2 bg-blue-500 text-white rounded"
                     >
-                        Enter
+                        Save World
                     </button>
-                </div>
+                </form>
             </div>
         </div>
-
-        <!-- Modal Global -->
-        <Modal
-            :show="isOpen"
-            :title="selectedWorld ? `Halo dari ${selectedWorld.name}` : ''"
-            @close="isOpen = false"
-        >
-            <p v-if="selectedWorld">
-                Isi body modal untuk <b>{{ selectedWorld.name }}</b> 🚀
-            </p>
-        </Modal>
     </div>
 </template>

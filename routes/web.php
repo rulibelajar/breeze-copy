@@ -7,6 +7,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\GameWorld\GameWorldController;
 use App\Http\Controllers\Admin\AircraftsController;
+use App\Http\Controllers\Worlds\World1Controller;
+use App\Http\Controllers\Worlds\World2Controller;
+use App\Http\Controllers\Worlds\World3Controller;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -38,6 +42,9 @@ Route::middleware(['auth', 'userMiddleware'])
         //Route::get('/', [UserController::class, 'index'])->name('worlds');
         Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
         Route::get('/worlds', [UserController::class, 'worlds'])->name('worlds');
+        Route::post('/world1', [World1Controller::class, 'store'])->name('world1.store');
+        Route::post('/world2', [World2Controller::class, 'store'])->name('world2.store');
+        Route::post('/world3', [World3Controller::class, 'store'])->name('world3.store');
     });
 
 // Admin Route Coba
@@ -54,4 +61,5 @@ Route::middleware(['auth', 'adminMiddleware'])
 
 
         Route::get('game-worlds', [GameWorldController::class, 'index'])->name('gameworlds');
+        Route::post('/world1', [World1Controller::class, 'store'])->name('world1.store');
     });

@@ -190,13 +190,13 @@ class DatabaseSeeder extends Seeder
                 }
             }
 
-            foreach (User::all() as $user) {
-                UserWorld1::create([
-                    'user_id' => $user->id,
-                    'airline_name' => 'Airline ' . $user->username,
-                    'day_game' => 1,
-                ]);
-            }
+            // foreach (User::all() as $user) {
+            //     UserWorld1::create([
+            //         'user_id' => $user->id,
+            //         'airline_name' => 'Airline ' . $user->username,
+            //         'day_game' => 1,
+            //     ]);
+            // }
         }
     }
 }

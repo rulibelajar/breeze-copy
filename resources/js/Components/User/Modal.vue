@@ -1,46 +1,36 @@
-<template>
-    <div
-        v-if="show"
-        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
-    >
-        <div class="bg-white rounded-lg shadow-lg p-6 w-1/3">
-            <!-- Header -->
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-lg font-bold">{{ title }}</h2>
-                <button @click="close" class="text-gray-500 hover:text-red-500">
-                    ✖
-                </button>
-            </div>
-
-            <!-- Body -->
-            <div>
-                <slot />
-            </div>
-
-            <!-- Footer -->
-            <div class="flex justify-end mt-4">
-                <button
-                    @click="close"
-                    class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
-                >
-                    Close
-                </button>
-            </div>
-        </div>
-    </div>
-</template>
-
 <script setup>
-import { defineProps, defineEmits } from "vue";
+import axios from "axios";
+import { ref } from "vue";
 
-const props = defineProps({
-    show: Boolean,
-    title: String,
-});
+const airlineName = ref("");
 
-const emit = defineEmits(["close"]);
-
-const close = () => {
-    emit("close");
+const saveWorld = async () => {
+    try {
+        let response = await axios.post("/world1", {
+            airline_name: airlineName.value,
+        });
+        console.log("World saved:", response.data);
+        airlineName.value = ""; // reset form setelah sukses
+    } catch (error) {
+        console.error("Error:", error);
+    }
 };
 </script>
+
+<template>
+    <form @submit.prevent="saveWorld" class="space-y-4">
+        <div>
+            <label class="block mb-1 font-semibold">Airline Name</label>
+            <input
+                v-model="airlineName"
+                type="text"
+                class="border px-3 py-2 rounded w-full"
+                placeholder="Masukkan nama airline"
+            />
+        </div>
+
+        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded">
+            Save World
+        </button>
+    </form>
+</template>
