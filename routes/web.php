@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\AdminUserController;
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\UserController;
-use App\Http\Controllers\GameWorld\GameWorldController;
+use App\Http\Controllers\Admin\AdminGameWorldController;
 use App\Http\Controllers\Admin\AircraftsController;
 use App\Http\Controllers\Worlds\World1Controller;
 use App\Http\Controllers\Worlds\World2Controller;
@@ -14,7 +14,7 @@ use App\Http\Controllers\Worlds\World3Controller;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -60,6 +60,6 @@ Route::middleware(['auth', 'adminMiddleware'])
 
 
 
-        Route::get('game-worlds', [GameWorldController::class, 'index'])->name('gameworlds');
+        Route::get('/game-worlds', [AdminGameWorldController::class, 'index'])->name('gameworlds');
         Route::post('/world1', [World1Controller::class, 'store'])->name('world1.store');
     });
