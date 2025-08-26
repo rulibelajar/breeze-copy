@@ -14,7 +14,7 @@ class UserController extends Controller
         try {
             $worlds = GameWorld::all();
 
-            $nextDayChange = GameWorld::first()->next_day_change ?? null;
+
 
             return Inertia::render('Dashboard', [
                 'title' => 'All Game Worlds',

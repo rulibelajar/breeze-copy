@@ -58,7 +58,7 @@ defineProps({
                             v-model="airlineNames[world.id]"
                             type="text"
                             class="border px-3 py-2 rounded w-full"
-                            placeholder="Masukkan nama airline"
+                            placeholder="Enter Your Airline Name"
                         />
                     </div>
 
@@ -66,7 +66,7 @@ defineProps({
                         type="submit"
                         class="px-4 py-2 bg-blue-500 text-white rounded"
                     >
-                        Save World
+                        Start Airline
                     </button>
                 </form>
             </div>
