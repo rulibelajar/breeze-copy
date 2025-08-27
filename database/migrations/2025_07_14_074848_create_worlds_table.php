@@ -19,6 +19,11 @@ return new class extends Migration
             $table->datetime('next_day_change')->nullable(); // Kapan hari akan berganti lagi
             $table->boolean('is_active')->default(true);
             $table->timestamps();
+
+            // 1 user = 1 airline per world
+            $table->unique('user_id');
+            // Airline name unique dalam world 1 saja
+            $table->unique('airline_name');
         });
 
         Schema::create('user_world_2', function (Blueprint $table) {
@@ -29,6 +34,11 @@ return new class extends Migration
             $table->datetime('next_day_change')->nullable(); // Kapan hari akan berganti lagi
             $table->boolean('is_active')->default(true);
             $table->timestamps();
+
+            // 1 user = 1 airline per world
+            $table->unique('user_id');
+            // Airline name unique dalam world 1 saja
+            $table->unique('airline_name');
         });
 
         Schema::create('user_world_3', function (Blueprint $table) {
@@ -39,6 +49,11 @@ return new class extends Migration
             $table->datetime('next_day_change')->nullable(); // Kapan hari akan berganti lagi
             $table->boolean('is_active')->default(true);
             $table->timestamps();
+
+            // 1 user = 1 airline per world
+            $table->unique('user_id');
+            // Airline name unique dalam world 1 saja
+            $table->unique('airline_name');
         });
     }
 
@@ -47,6 +62,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('worlds');
+        Schema::dropIfExists('user_world_1');
+        Schema::dropIfExists('user_world_2');
+        Schema::dropIfExists('user_world_3');
     }
 };

@@ -45,14 +45,17 @@ defineProps({
                 class="p-4 border rounded shadow"
             >
                 <h2 class="font-semibold text-lg">{{ world.name }}</h2>
-                <p>Name: {{ world.name }}</p>
                 <p>Day Game: {{ world.game_day }}</p>
                 <p>Day Date: {{ world.game_date }}</p>
 
-                <form @submit.prevent="saveWorld(world)" class="space-y-4">
+                <form
+                    v-if="!world.airline_name"
+                    @submit.prevent="saveWorld(world)"
+                    class="space-y-4"
+                >
                     <div>
                         <label class="block mb-1 font-semibold"
-                            >Airline Name</label
+                            >You Don't Have an Airline</label
                         >
                         <input
                             v-model="airlineNames[world.id]"
@@ -69,6 +72,16 @@ defineProps({
                         Start Airline
                     </button>
                 </form>
+
+                <!-- Kalau airline_name sudah ada -->
+                <div v-else class="mt-4 p-2 bg-gray-100 rounded text-gray-600">
+                    <button
+                        type="submit"
+                        class="px-4 py-2 bg-blue-500 text-white rounded"
+                    >
+                        {{ world.airline_name }}
+                    </button>
+                </div>
             </div>
         </div>
     </div>
