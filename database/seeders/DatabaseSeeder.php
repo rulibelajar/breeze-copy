@@ -50,6 +50,13 @@ class DatabaseSeeder extends Seeder
                     'email' => 'admin@example.com',
                     'password' => Hash::make('password'),
                 ],
+                [
+                    'name' => 'Ricardo Simatupang',
+                    'username' => 'ricardo',
+                    'role' => 'user',
+                    'email' => 'ricardo@example.com',
+                    'password' => Hash::make('password'),
+                ],
             ];
 
             GameWorld::create([
