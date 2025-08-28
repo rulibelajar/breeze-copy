@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminUserController;
 
+use App\Http\Controllers\Airline\AirlineController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminGameWorldController;
@@ -45,6 +46,10 @@ Route::middleware(['auth', 'userMiddleware'])
         Route::post('/world1', [World1Controller::class, 'store'])->name('world1.store');
         Route::post('/world2', [World2Controller::class, 'store'])->name('world2.store');
         Route::post('/world3', [World3Controller::class, 'store'])->name('world3.store');
+
+        // Masuk ke halaman airline dalam satu world
+        Route::get('/world{world}/airline/{airline}', [AirlineController::class, 'show'])
+            ->name('airline.show');
     });
 
 // Admin Route Coba

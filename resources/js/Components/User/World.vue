@@ -36,6 +36,9 @@ const saveWorld = async (world) => {
 
         console.log("World saved:", response.data);
 
+        // redirect ke halaman airline di world tsb
+        window.location.href = `/world${worldNumber}/airline/${response.data.id}`;
+
         // reset input untuk world ini saja
         airlineName.value[world.id] = "";
 
@@ -73,11 +76,17 @@ defineProps({
     worlds: Array,
     title: String,
 });
+
+// untuk enter ke world yang dimaksud
+const enterWorld = (world) => {
+    const worldNumber = world.name.split(" ").pop();
+    window.location.href = `/world${worldNumber}/airline/${world.id}`;
+};
 </script>
 
 <template>
     <div
-        class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 p-6"
+        class="min-h-screen bg-gradient-to-br from-blue-100 via-indigo-100 to-blue-200 p-6"
     >
         <h1 class="text-3xl font-bold mb-6 text-gray-800">{{ title }}</h1>
 
@@ -158,6 +167,7 @@ defineProps({
                     <button
                         type="button"
                         class="w-full px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-md font-medium transition-colors"
+                        @click="enterWorld(world)"
                     >
                         Enter Game
                     </button>
