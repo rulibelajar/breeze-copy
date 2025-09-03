@@ -48,8 +48,8 @@ Route::middleware(['auth', 'userMiddleware'])
         Route::post('/world3', [World3Controller::class, 'store'])->name('world3.store');
 
         // Masuk ke halaman airline dalam satu world
-        Route::get('/world{world}/airline/{airline}', [AirlineController::class, 'show'])
-            ->name('airline.show');
+        Route::get('/world{world}/airline/{airline}', [AirlineController::class, 'save'])
+            ->name('airline.save');
     });
 
 // Admin Route Coba

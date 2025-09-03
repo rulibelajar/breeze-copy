@@ -75,12 +75,13 @@ const clearError = (worldId) => {
 defineProps({
     worlds: Array,
     title: String,
+    user: Object,
 });
 
 // untuk enter ke world yang dimaksud
 const enterWorld = (world) => {
     const worldNumber = world.name.split(" ").pop();
-    window.location.href = `/world${worldNumber}/airline/${world.id}`;
+    window.location.href = `/world${worldNumber}/airline/${user.id}`;
 };
 </script>
 
@@ -103,6 +104,7 @@ const enterWorld = (world) => {
                 <p class="text-gray-600 mb-4">
                     Day Date: {{ world.game_date }}
                 </p>
+                <p class="text-gray-600 mb-4">Id User: {{ user.id }}</p>
 
                 <form
                     v-if="!world.airline_name"

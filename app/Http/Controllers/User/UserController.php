@@ -57,6 +57,8 @@ class UserController extends Controller
             ];
 
             return Inertia::render('Dashboard', [
+                'user' => $user->id,
+                'username' => $user->username,
                 'title' => 'User Game Worlds',
                 'worlds' => $worlds,
             ]);

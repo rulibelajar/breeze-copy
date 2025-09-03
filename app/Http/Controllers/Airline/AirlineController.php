@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class AirlineController extends Controller
 {
     //
-    public function show($world, $airline)
+    public function save($world, $airline)
     {
         return "World: $world, Airline: $airline";
     }
