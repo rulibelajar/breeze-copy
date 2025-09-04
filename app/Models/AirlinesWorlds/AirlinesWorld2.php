@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Models\Worlds;
+namespace App\Models\AirlinesWorlds;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class UserWorld2 extends Model
+class AirlinesWorld2 extends Model
 {
     //
     use HasFactory;
 
     public $incrementing = false;
     protected $keyType = 'string';
-    protected $table = 'user_world_2';
+    protected $table = 'airlines_world_2';
     protected $fillable = [
         'user_id',
         'airline_name',

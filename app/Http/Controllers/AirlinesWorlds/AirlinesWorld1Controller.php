@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Worlds;
+namespace App\Http\Controllers\AirlinesWorlds;
 
 use App\Http\Controllers\Controller;
-use App\Models\Worlds\UserWorld1;
+use App\Models\AirlinesWorlds\AirlinesWorld1;
 use Illuminate\Http\Request;
 
-class World1Controller extends Controller
+class AirlinesWorld1Controller extends Controller
 {
     public function store(Request $request)
     {
@@ -19,7 +19,7 @@ class World1Controller extends Controller
             'airline_name.unique' => 'Airline name has already been taken, please choose another name.',
         ]);
 
-        $world = UserWorld1::create([
+        $world = AirlinesWorld1::create([
             'user_id' => request()->user()->id,
             'airline_name' => $request->airline_name,
         ]);

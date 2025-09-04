@@ -8,10 +8,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminGameWorldController;
 use App\Http\Controllers\Admin\AircraftsController;
-use App\Http\Controllers\Worlds\World1Controller;
-use App\Http\Controllers\Worlds\World2Controller;
-use App\Http\Controllers\Worlds\World3Controller;
-
+use App\Http\Controllers\AirlinesWorlds\AirlinesWorld1Controller;
+use App\Http\Controllers\AirlinesWorlds\AirlinesWorld2Controller;
+use App\Http\Controllers\AirlinesWorlds\AirlinesWorld3Controller;
+use App\Models\AirlinesWorlds\AirlinesWorld1;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -43,9 +43,9 @@ Route::middleware(['auth', 'userMiddleware'])
         //Route::get('/', [UserController::class, 'index'])->name('worlds');
         Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
         Route::get('/worlds', [UserController::class, 'worlds'])->name('worlds');
-        Route::post('/world1', [World1Controller::class, 'store'])->name('world1.store');
-        Route::post('/world2', [World2Controller::class, 'store'])->name('world2.store');
-        Route::post('/world3', [World3Controller::class, 'store'])->name('world3.store');
+        Route::post('/world1', [AirlinesWorld1Controller::class, 'store'])->name('world1.store');
+        Route::post('/world2', [AirlinesWorld2Controller::class, 'store'])->name('world2.store');
+        Route::post('/world3', [AirlinesWorld3Controller::class, 'store'])->name('world3.store');
 
         // Masuk ke halaman airline dalam satu world
         Route::get('/world{world}/airline/{airline}', [AirlineController::class, 'save'])
@@ -66,5 +66,4 @@ Route::middleware(['auth', 'adminMiddleware'])
 
 
         Route::get('/game-worlds', [AdminGameWorldController::class, 'index'])->name('gameworlds');
-        Route::post('/world1', [World1Controller::class, 'store'])->name('world1.store');
     });

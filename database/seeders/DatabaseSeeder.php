@@ -2,17 +2,14 @@
 
 namespace Database\Seeders;
 
-use App\Models\GameWorld;
-use App\Models\Route;
-use App\Models\User;
-use App\Models\UserWorld;
-use App\Models\Aircraft;
-use App\Models\Worlds\UserWorld1;
-use Illuminate\Support\Facades\Hash;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
+use App\Models\Worlds\UserWorld1;
+use App\Models\Worlds\UserWorld2;
+use App\Models\Worlds\UserWorld3;
 
 class DatabaseSeeder extends Seeder
 {
