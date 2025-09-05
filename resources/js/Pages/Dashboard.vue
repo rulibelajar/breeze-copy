@@ -1,8 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head } from "@inertiajs/vue3";
-import World from "@/Components/User/World.vue";
-
+import { Head, useForm } from "@inertiajs/vue3";
 import { defineProps } from "vue";
 
 const props = defineProps({
@@ -10,7 +8,18 @@ const props = defineProps({
     username: String,
     title: String,
     worlds: Array,
+    have_airline: Boolean,
 });
+
+// form inertia
+const form = useForm({
+    airline_name: "",
+    world_id: "1",
+});
+
+const submit = () => {
+    form.post(route("airline.store")); // sesuaikan route name / endpoint backend kamu
+};
 </script>
 
 <template>
@@ -27,36 +36,50 @@ const props = defineProps({
             <h1 class="text-2xl font-bold mb-4">{{ title }}</h1>
             <p class="mb-6">User ID: {{ user }}</p>
             <p class="mb-6">Username: {{ username }}</p>
+            <h2 class="mb-6">{{ title }}</h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div
-                    v-for="world in worlds"
-                    :key="world.id"
-                    class="p-4 border rounded shadow"
-                >
-                    <h2 class="text-lg font-semibold mb-2">{{ world.name }}</h2>
-                    <p>Game Day: {{ world.game_day }}</p>
-                    <p>Game Date: {{ world.game_date }}</p>
-                    <p v-if="world.airline_name">
-                        Airline: {{ world.airline_name }}
-                    </p>
-                    <p v-else class="text-gray-500 italic">Belum ada airline</p>
-
-                    <div class="mt-4">
-                        <button
-                            v-if="world.exists"
-                            class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+            <!-- kalau belum punya airlines -->
+            <div v-if="!have_airline" class="mt-6">
+                <h3 class="text-lg font-semibold mb-2">Create Your Airline</h3>
+                <form @submit.prevent="submit" class="space-y-4">
+                    <div>
+                        <label
+                            for="name"
+                            class="block text-sm font-medium text-gray-700"
                         >
-                            Enter World
-                        </button>
-                        <button
-                            v-else
-                            class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+                            Airline Name
+                        </label>
+                        <input
+                            v-model="form.airline_name"
+                            type="text"
+                            id="airline_name"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                        />
+                        <div
+                            v-if="form.errors.airline_name"
+                            class="text-red-500 text-sm"
                         >
-                            Start New World
-                        </button>
+                            {{ form.errors.airline_name }}
+                        </div>
                     </div>
-                </div>
+
+                    <button
+                        type="submit"
+                        class="px-4 py-2 bg-blue-600 text-white rounded-md"
+                        :disabled="form.processing"
+                    >
+                        Save
+                    </button>
+                </form>
+            </div>
+            <!-- kalau sudah punya airline -->
+            <div v-else class="mt-6">
+                <button
+                    @click="$inertia.visit(route('worlds.index'))"
+                    class="px-4 py-2 bg-green-600 text-white rounded-md"
+                >
+                    Enter World
+                </button>
             </div>
         </div>
     </AuthenticatedLayout>

@@ -11,11 +11,12 @@ use App\Http\Controllers\Admin\AircraftsController;
 use App\Http\Controllers\AirlinesWorlds\AirlinesWorld1Controller;
 use App\Http\Controllers\AirlinesWorlds\AirlinesWorld2Controller;
 use App\Http\Controllers\AirlinesWorlds\AirlinesWorld3Controller;
-use App\Models\AirlinesWorlds\AirlinesWorld1;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -43,7 +44,7 @@ Route::middleware(['auth', 'userMiddleware'])
         //Route::get('/', [UserController::class, 'index'])->name('worlds');
         Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
         Route::get('/worlds', [UserController::class, 'worlds'])->name('worlds');
-        Route::post('/world1', [AirlinesWorld1Controller::class, 'store'])->name('world1.store');
+        Route::post('/airline', [AirlineController::class, 'store'])->name('airline.store');
         Route::post('/world2', [AirlinesWorld2Controller::class, 'store'])->name('world2.store');
         Route::post('/world3', [AirlinesWorld3Controller::class, 'store'])->name('world3.store');
 

@@ -53,10 +53,7 @@ class DatabaseSeeder extends Seeder
                     'role' => 'user',
                     'email' => 'ricardo@example.com',
                     'password' => Hash::make('password'),
-                ],
-
-
-
+                ]
             ];
 
             // masukkan semua users ke database
