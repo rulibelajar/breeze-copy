@@ -9,12 +9,13 @@ const props = defineProps({
     title: String,
     worlds: Array,
     have_airline: Boolean,
+    airline_name: String,
 });
 
 // form inertia
 const form = useForm({
     airline_name: "",
-    world_id: "1",
+    world_id: "2",
 });
 
 const submit = () => {
@@ -37,6 +38,7 @@ const submit = () => {
             <p class="mb-6">User ID: {{ user }}</p>
             <p class="mb-6">Username: {{ username }}</p>
             <h2 class="mb-6">{{ title }}</h2>
+            <p class="mb-6">Airline Name: {{ airline_name }}</p>
 
             <!-- kalau belum punya airlines -->
             <div v-if="!have_airline" class="mt-6">

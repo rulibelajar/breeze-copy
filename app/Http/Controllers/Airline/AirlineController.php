@@ -15,11 +15,14 @@ class AirlineController extends Controller
     {
         $request->validate([
             'airline_name' => 'required|regex:/^[a-zA-Z\s]+$/|max:20|unique:airlines,airline_name,NULL,id,world_id,' . $request->world_id,
+            'world_id' => 'required|in:1,2,3'
         ], [
             'airline_name.required' => 'Airline name is required.',
             'airline_name.regex' => 'Airline name can only contain letters and spaces.',
             'airline_name.max' => 'Airline name must not exceed 20 characters.',
             'airline_name.unique' => 'Airline name has already been taken in this world.',
+            'world_id.required' => 'World is required.',
+            'world_id.in' => 'Invalid world selected.',
         ]);
 
 
