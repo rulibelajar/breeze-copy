@@ -14,32 +14,47 @@ use App\Models\AirlinesWorlds\AirlinesWorld3;
 
 use App\Models\Airline;
 
+
+
+
 class UserController extends Controller
 {
     public function dashboard(): Response|RedirectResponse
     {
-        $world_id = 2;
-
         $user = Auth::user();
 
-        // cek apakah user ini sudah punya airline di world tsb
-        $have_airline = Airline::where('user_id', $user->id)->where('world_id', $world_id)->exists();
+        $worlds = [];
 
-        // mengambil hanya airlines name dari airlines di world tsb
-        $airline_name = Airline::where('world_id', $world_id)->value('airline_name');
+        // Loop untuk world 1, 2, dan 3
+        for ($world_id = 1; $world_id <= 3; $world_id++) {
+            // Cek apakah user sudah punya airline di world ini
+            $have_airline = Airline::where('user_id', $user->id)
+                ->where('world_id', $world_id)
+                ->exists();
 
+            // Ambil nama airline user di world ini (jika ada)
+            $airline_name = null;
+            if ($have_airline) {
+                $airline_name = Airline::where('user_id', $user->id)
+                    ->where('world_id', $world_id)
+                    ->value('airline_name');
+            }
 
-
+            $worlds[] = [
+                'id' => $world_id,
+                'title' => 'World ' . $world_id,
+                'have_airline' => $have_airline,
+                'airline_name' => $airline_name
+            ];
+        }
 
         return Inertia::render('Dashboard', [
             'user' => $user->id,
             'username' => $user->username,
-            'title' => 'World ' . $world_id,
-            'airline_name' => $airline_name,
-            'have_airline' => $have_airline
-
+            'worlds' => $worlds
         ]);
     }
+
 
     public function worlds(): Response
     {
