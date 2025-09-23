@@ -4,13 +4,12 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminUserController;
 
 use App\Http\Controllers\Airline\AirlineController;
+use App\Http\Controllers\Airline\ManageAirlineController;
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminGameWorldController;
 use App\Http\Controllers\Admin\AircraftsController;
-use App\Http\Controllers\AirlinesWorlds\AirlinesWorld1Controller;
-use App\Http\Controllers\AirlinesWorlds\AirlinesWorld2Controller;
-use App\Http\Controllers\AirlinesWorlds\AirlinesWorld3Controller;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -41,16 +40,12 @@ require __DIR__ . '/auth.php';
 // User Route
 Route::middleware(['auth', 'userMiddleware'])
     ->group(function () {
-        //Route::get('/', [UserController::class, 'index'])->name('worlds');
-        Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
-        Route::get('/worlds', [UserController::class, 'worlds'])->name('worlds');
-        Route::post('/airline', [AirlineController::class, 'store'])->name('airline.store');
-        Route::post('/world2', [AirlinesWorld2Controller::class, 'store'])->name('world2.store');
-        Route::post('/world3', [AirlinesWorld3Controller::class, 'store'])->name('world3.store');
 
-        // Masuk ke halaman airline dalam satu world
-        Route::get('/world{world}/airline/{airline}', [AirlineController::class, 'save'])
-            ->name('airline.save');
+        Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+
+        Route::post('/airline', [AirlineController::class, 'store'])->name('airline.store');
+
+        Route::get('/manage-airline/{worldId}', [ManageAirlineController::class, 'index'])->name('manage-airline.index');
     });
 
 // Admin Route Coba

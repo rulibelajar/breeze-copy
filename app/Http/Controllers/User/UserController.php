@@ -8,9 +8,6 @@ use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Http\RedirectResponse;
 
-use App\Models\AirlinesWorlds\AirlinesWorld1;
-use App\Models\AirlinesWorlds\AirlinesWorld2;
-use App\Models\AirlinesWorlds\AirlinesWorld3;
 
 use App\Models\Airline;
 

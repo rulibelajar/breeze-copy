@@ -2,9 +2,10 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, useForm } from "@inertiajs/vue3";
 import { defineProps, ref } from "vue";
+import { router } from "@inertiajs/vue3";
 
 const props = defineProps({
-    user: Number,
+    user: String,
     username: String,
     worlds: Array,
 });
@@ -46,9 +47,7 @@ const hideForm = () => {
 
 const enterWorld = (worldId) => {
     // Sesuaikan dengan route Anda
-    window.location.href = route("worlds.show", worldId);
-    // atau gunakan:
-    // $inertia.visit(route('worlds.show', worldId))
+    router.visit(`/manage-airline/${worldId}`);
 };
 </script>
 
