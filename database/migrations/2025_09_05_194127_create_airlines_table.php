@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->string('airline_name', 100); // Batasi panjang untuk performa index
             $table->integer('day_game')->default(1);
             $table->datetime('next_day_change')->nullable();
-            $table->boolean('is_active')->default(true);
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
 
             // Indexes untuk performa
