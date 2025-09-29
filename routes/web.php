@@ -46,6 +46,8 @@ Route::middleware(['auth', 'userMiddleware'])
         Route::post('/airline', [AirlineController::class, 'store'])->name('airline.store');
 
         Route::get('/manage-airline/{worldId}', [ManageAirlineController::class, 'index'])->name('manage-airline.index');
+
+        Route::post('/manage-airline-start/{worldId}', [ManageAirlineController::class, 'start'])->name('manage-airline.start');
     });
 
 // Admin Route Coba

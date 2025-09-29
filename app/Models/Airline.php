@@ -21,6 +21,7 @@ class Airline extends Model
         'world_id',
         'day_game',
         'next_day_change',
+        'is_active'
     ];
 
     protected static function boot()
